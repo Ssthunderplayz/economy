@@ -1,10 +1,24 @@
 const Discord = require("discord.js");
- const client = new Discord.Client({ disableMentions: 'everyone' });
+ const { Intents, Client } = require('discord.js');
+const client = new Client({
+    intents: [
+       "GUILDS",
+       "GUILD_MESSAGES",
+       "GUILD_VOICE_STATES",
+    ]
+});
 const Eco = require("quick.eco");
-client.eco = new Eco.Manager(); // quick.eco
 client.db = Eco.db; // quick.db
 client.config = require("./botConfig");
-Client.on('ready' , () => {console.log('bot is online')})
+client.on ("message", (message) => {
+
+    if (message.author.bot) return;
+
+    if (message.content.startsWith (${client.prefix}.` + "bot")) {
+        message.reply ('Running...');
+    }
+
+});
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.shop = {
@@ -43,4 +57,4 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 
-client.login("ODk0NDU4ODUyMjg2Nzk1Nzk4.YVqTuA.ddyVAeQdEvEkisEgi_hlyBxfKxw");
+client.login("Token")
